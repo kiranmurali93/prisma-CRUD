@@ -1,5 +1,6 @@
-generator client{
+generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["aggregateApi"] 
 }
 
 datasource db {
@@ -60,7 +61,7 @@ model CourseEnrollment {
   user      User     @relation(fields: [userId], references: [id])
   course    Course   @relation(fields: [courseId], references: [id])
 
-  @@id([userId, courseId, role])
+  @@id([userId, courseId])
 }
 
 enum UserRole {
