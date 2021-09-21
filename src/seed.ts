@@ -6,8 +6,9 @@ const prisma = new PrismaClient()
 // A `main` function so that we can use async/await
 async function main() {
   //deleting all elements
-  await prisma.user.deleteMany({})
+  await prisma.testResult.deleteMany({})
   await prisma.courseEnrollment.deleteMany({})
+  await prisma.user.deleteMany({})
   await prisma.test.deleteMany({})
   await prisma.course.deleteMany({})
   
