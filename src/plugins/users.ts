@@ -102,9 +102,9 @@ async function createUserHandeler(
     h: Hapi.ResponseToolkit) {
      //cont prisma = new PrismaClient -- not working 
      // experimental line
-     const prisma   = new PrismaClient
+     const { prisma } = request.server.app
      const payload = request.payload as UserInput
-    console.log(payload.email);
+    //console.log(payload.email);
      
     try {
         const createdUser = await prisma.user.create({

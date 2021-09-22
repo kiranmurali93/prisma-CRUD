@@ -11,10 +11,17 @@ const server: Hapi.Server = Hapi.server({
     port: process.env.PORT || 3000
 }) 
 
+//function to create server
+export async function createServer(): Promise<Hapi.Server> {
+    await server.register([statusPlugin, prismaPlugin, userPlugin])
+    await server.initialize()
+    return server
+}
+
 // funtion to start
 
-export async function start(): Promise<Hapi.Server> {
-    await server.register([statusPlugin, prismaPlugin, userPlugin])
+export async function startServer(server: Hapi.Server): Promise<Hapi.Server> {
+    // await server.register([statusPlugin, prismaPlugin, userPlugin])
     await server.start()
     console.log(`server is up and running on port: ${server.info.uri}`);
     return server 
@@ -25,8 +32,3 @@ process.on(`unhandeledRejections`, (err) => {
     console.log(err)
     process.exit(1)
 })
-
-start()
-    .catch((err) => {
-        console.log(err)
-    })
